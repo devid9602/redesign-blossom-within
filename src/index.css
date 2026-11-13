@@ -324,6 +324,39 @@ ul {
   pointer-events: none;
 }
 
+/* The sun: a soft disc that rises behind the right half of the frame,
+   so the wide empty side carries the idea instead of sitting blank. */
+.hero__sun {
+  position: absolute;
+  z-index: -1;
+  right: clamp(-12rem, -8vw, -2rem);
+  bottom: -18vh;
+  width: clamp(22rem, 46vw, 46rem);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(236, 209, 148, 0.34) 0%,
+    rgba(236, 209, 148, 0.14) 38%,
+    rgba(196, 85, 58, 0.06) 58%,
+    transparent 72%
+  );
+  filter: blur(6px);
+  pointer-events: none;
+  animation: sunrise 5.5s var(--ease-out) both;
+}
+
+@keyframes sunrise {
+  from {
+    transform: translateY(32%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 .hero__eyebrow {
   font-size: var(--t-sm);
   color: var(--text-soft);
@@ -608,8 +641,54 @@ ul {
   font-size: var(--t-xl);
 }
 
-.vid:hover .vid__title {
+.vid:hover .vid__title,
+.vid:focus-visible .vid__title {
   color: var(--dawn);
+}
+
+.vid {
+  position: relative;
+}
+
+/* A thin gold line draws across the top edge on hover */
+.vid::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: var(--dawn);
+  box-shadow: 0 0 14px var(--dawn-glow);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.6s var(--ease-out);
+}
+
+.vid:hover::before,
+.vid:focus-visible::before {
+  transform: scaleX(1);
+}
+
+.vid__go {
+  font-style: normal;
+  color: var(--dawn);
+  margin-inline-start: 0.9rem;
+  opacity: 0;
+  transform: translateX(-6px);
+  display: inline-block;
+  transition: opacity 0.4s var(--ease), transform 0.4s var(--ease);
+}
+
+.vid:hover .vid__go,
+.vid:focus-visible .vid__go {
+  opacity: 1;
+  transform: none;
+}
+
+@media (hover: none) {
+  .vid__go {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .vid__meta {
@@ -969,6 +1048,7 @@ ul {
 
 .foot__links {
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
   gap: 1.5rem 2.5rem;
   padding-bottom: clamp(3rem, 7vh, 5rem);
@@ -986,6 +1066,25 @@ ul {
 .foot__link:hover {
   color: var(--dawn);
   border-bottom-color: var(--dawn);
+}
+
+/* The one action we actually want: a filled gold button */
+.foot__link--primary {
+  color: var(--ink);
+  background: var(--dawn);
+  border: 1px solid var(--dawn);
+  border-radius: 999px;
+  padding: 0.7rem 1.6rem;
+  font-weight: 500;
+  box-shadow: 0 0 28px var(--dawn-glow);
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
+}
+.foot__link--primary:hover {
+  color: var(--ink);
+  background: var(--dawn);
+  border-color: var(--dawn);
+  transform: translateY(-2px);
+  box-shadow: 0 0 40px var(--dawn-glow);
 }
 
 .foot__base {

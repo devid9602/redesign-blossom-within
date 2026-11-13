@@ -22,7 +22,12 @@ function Video({ item, index }) {
       </div>
       <div className="vid__meta">
         <span>{item.source}</span>
-        <span>{item.length}</span>
+        <span>
+          {item.length}
+          <i className="vid__go" aria-hidden="true">
+            सुनिए ↗
+          </i>
+        </span>
       </div>
     </a>
   );
