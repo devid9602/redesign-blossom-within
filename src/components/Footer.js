@@ -11,7 +11,7 @@ export default function Footer() {
 
         <div className="foot__links">
           <a
-            className="foot__link"
+            className="foot__link foot__link--primary"
             href={channel.url}
             target="_blank"
             rel="noreferrer"
