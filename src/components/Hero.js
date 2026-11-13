@@ -16,6 +16,8 @@ export default function Hero() {
 
   return (
     <header className="hero" id="top">
+      {/* Decorative: the sun below the horizon, slowly rising */}
+      <div className="hero__sun" aria-hidden="true" />
       <div className="hero__inner">
         <motion.p className="hero__eyebrow" {...rise(0.1)}>
           {channel.tagline}
